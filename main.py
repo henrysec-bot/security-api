@@ -1,18 +1,15 @@
 from fastapi import FastAPI, HTTPException, Request
 import subprocess
 import os
+import re
 
 app = FastAPI()
 
-API_TOKEN = os.getenv("API_TOKEN")
+API_TOKEN = os.getenv("f6c5b46e8a9e7084bc8e510aab254473")
 
 @app.get("/")
 async def root():
     return {"message": "API Henry Security está ativa!"}
-
-@app.get("/analise_rapida")
-async def analise_rapida_get():
-    return {"message": "Use o método POST para enviar a URL para análise."}
 
 @app.post("/analise_rapida")
 async def analise_rapida(request: Request):
@@ -25,7 +22,10 @@ async def analise_rapida(request: Request):
     if not url:
         raise HTTPException(status_code=400, detail="URL is required")
 
-    cmd = f"./scripts/analise_rapida.sh {url}"
+    # Limpa http:// e https://
+    clean_url = re.sub(r'^https?:\/\/', '', url)
+
+    cmd = f"./scripts/analise_rapida.sh {clean_url}"
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
 
