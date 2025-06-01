@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  henry-security-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      API_TOKEN: "f6c5b46e8a9e7084bc8e510aab254473"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./:/app
