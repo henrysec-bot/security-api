@@ -5,7 +5,7 @@ import re
 
 app = FastAPI()
 
-API_TOKEN = os.getenv("f6c5b46e8a9e7084bc8e510aab254473")
+API_TOKEN = os.getenv("API_TOKEN")
 
 @app.get("/")
 async def root():
