@@ -4,7 +4,7 @@ import os
 
 app = FastAPI()
 
-API_TOKEN = "f6c5b46e8a9e7084bc8e510aab254473"
+API_TOKEN = os.getenv("f6c5b46e8a9e7084bc8e510aab254473")
 
 @app.post("/analise_rapida")
 async def analise_rapida(request: Request):
