@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: security-api
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: ENV
+        value: production
+    healthCheckPath: /docs

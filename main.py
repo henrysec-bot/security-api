@@ -4,7 +4,15 @@ import os
 
 app = FastAPI()
 
-API_TOKEN = os.getenv("f6c5b46e8a9e7084bc8e510aab254473")
+API_TOKEN = os.getenv("API_TOKEN")
+
+@app.get("/")
+async def root():
+    return {"message": "API Henry Security está ativa!"}
+
+@app.get("/analise_rapida")
+async def analise_rapida_get():
+    return {"message": "Use o método POST para enviar a URL para análise."}
 
 @app.post("/analise_rapida")
 async def analise_rapida(request: Request):
