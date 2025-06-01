@@ -3,29 +3,34 @@
 url=$1
 clean_url=$(echo $url | sed 's~http[s]*://~~g')
 
-echo "=== Relatório de Análise Rápida ==="
-echo "Alvo: $clean_url"
-echo "Data: $(date)"
-echo ""
+# Remove caracteres problemáticos para nomes de arquivo, como /, :, etc.
+safe_name=$(echo "$clean_url" | tr -cd '[:alnum:]._-')
 
-# Ping
-echo "== Teste de Ping =="
-ping -c 4 $clean_url || echo "Ping falhou."
-echo ""
+output_file="/app/relatorio_${safe_name}_$(date +%Y%m%d%H%M%S).txt"
 
-# Nmap - portas comuns
-echo "== Varredura de Portas (Nmap) =="
-nmap -Pn -T4 -F $clean_url
-echo ""
+{
+  echo "=== Relatório de Análise Rápida ==="
+  echo "Alvo: $clean_url"
+  echo "Data: $(date)"
+  echo ""
 
-# Whois
-echo "== Informações WHOIS =="
-whois $clean_url 2>/dev/null || echo "Whois não disponível."
-echo ""
+  echo "== Teste de Ping =="
+  ping -c 4 $clean_url || echo "Ping falhou."
+  echo ""
 
-# Cabeçalhos HTTP
-echo "== Headers HTTP =="
-curl -I --max-time 10 $url || echo "Não foi possível obter headers."
-echo ""
+  echo "== Varredura de Portas (Nmap) =="
+  nmap -Pn -T4 -F $clean_url
+  echo ""
 
-echo "=== Fim do Relatório ==="
+  echo "== Informações WHOIS =="
+  whois $clean_url 2>/dev/null || echo "Whois não disponível."
+  echo ""
+
+  echo "== Headers HTTP =="
+  curl -I --max-time 10 $url || echo "Não foi possível obter headers."
+  echo ""
+
+  echo "=== Fim do Relatório ==="
+} > $output_file
+
+echo "Relatório salvo em: $output_file"

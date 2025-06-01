@@ -1,0 +1,41 @@
+=== Relatório de Análise Rápida ===
+Alvo: henry-security.vercel.app
+Data: Sun Jun  1 19:31:29 UTC 2025
+
+== Teste de Ping ==
+PING henry-security.vercel.app (64.29.17.193) 56(84) bytes of data.
+64 bytes from 64.29.17.193 (64.29.17.193): icmp_seq=1 ttl=63 time=15.0 ms
+64 bytes from 64.29.17.193 (64.29.17.193): icmp_seq=2 ttl=63 time=15.0 ms
+64 bytes from 64.29.17.193 (64.29.17.193): icmp_seq=3 ttl=63 time=15.7 ms
+64 bytes from 64.29.17.193: icmp_seq=4 ttl=63 time=14.6 ms
+
+--- henry-security.vercel.app ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3594ms
+rtt min/avg/max/mdev = 14.643/15.080/15.663/0.368 ms
+
+== Varredura de Portas (Nmap) ==
+Starting Nmap 7.93 ( https://nmap.org ) at 2025-06-01 19:31 UTC
+Nmap scan report for henry-security.vercel.app (64.29.17.193)
+Host is up (0.0065s latency).
+Other addresses for henry-security.vercel.app (not scanned): 216.198.79.193
+Not shown: 96 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+21/tcp   open  ftp
+80/tcp   open  http
+443/tcp  open  https
+1723/tcp open  pptp
+
+Nmap done: 1 IP address (1 host up) scanned in 3.24 seconds
+
+== Informações WHOIS ==
+Whois não disponível.
+
+== Headers HTTP ==
+HTTP/1.0 308 Permanent Redirect
+Content-Type: text/plain
+Location: https://henry-security.vercel.app/
+Refresh: 0;url=https://henry-security.vercel.app/
+server: Vercel
+
+
+=== Fim do Relatório ===

@@ -35,6 +35,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Garantindo permissão pros scripts shell
 RUN chmod +x scripts/*.sh
 
+RUN apt-get update && apt-get install -y iputils-ping nmap whois curl
+
+
 EXPOSE 8000
 
 # Comando padrão pra iniciar a API
